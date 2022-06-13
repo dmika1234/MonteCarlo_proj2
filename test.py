@@ -22,6 +22,14 @@ import matplotlib.pyplot as plt
 #     ax3.scatter(x * D, y * D, z * D, s=1, label=j)
 #
 # plt.show()
+def create_sigma(n):
+    sigma = np.full((n, n), 0)
+    for i in np.arange(n):
+        for j in np.arange(n):
+            sigma[i, j] = np.minimum(i, j) + 1
+
+    sigma = sigma / n
+    return sigma
 
 
 m = 4
@@ -43,3 +51,24 @@ for j in np.arange(m) + 1:
 
 plt.show()
 
+#eu_option_strat_prop(100, 0.05, 100, 0.25, 1000, seed=2)
+# m = 4
+# R = 10000
+# fig3 = plt.figure(1)
+# ax3 = fig3.add_subplot(111, projection='3d')
+# nr_of_strata = m
+# n = 3
+# for j in np.arange(m) + 1:
+#     u = np.random.random(int(R / m))
+#     v = u / m + (j - 1) / m
+#     D = np.sqrt(chi2.ppf(v, df=3))
+#     ksi = np.random.multivariate_normal(mean=np.zeros(n), cov=np.identity(n), size=int(R / nr_of_strata))
+#     ksi_len = np.sqrt(np.sum(ksi ** 2, axis=0))
+#     X = ksi / ksi_len
+#     Z = (X.T * D).T
+#     sigma_matrix = create_sigma(n)
+#     A = np.linalg.cholesky(sigma_matrix)
+#     B = np.dot(A, Z.T).T
+#     ax3.scatter(B[:, 0], B[:, 1], B[:, 2], s=1, label=j)
+#
+# plt.show()
